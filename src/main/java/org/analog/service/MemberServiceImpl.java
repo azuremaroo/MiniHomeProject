@@ -3,6 +3,7 @@ package org.analog.service;
 import javax.inject.Inject;
 
 import org.analog.domain.MemberVO;
+import org.analog.persistence.GuestDAO;
 import org.analog.persistence.MemberDAO;
 import org.analog.persistence.PBoardManagerDAO;
 import org.analog.persistence.VBoardManagerDAO;
@@ -24,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private VBoardManagerDAO vbdao;
 	
+	@Inject
+	private GuestDAO guestdao;
+	
 
 	@Transactional
 	@Override
@@ -34,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		pbdao.createPBorad(vo.getM_id(), bm_name);
 		vbdao.createVBorad(vo.getM_id(), bm_name);
+		guestdao.createGuest(vo.getM_id());
 
 	}
 

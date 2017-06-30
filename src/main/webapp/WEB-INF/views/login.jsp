@@ -11,15 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <title>추억의 미니홈피 로그인</title>
-=======
-<title>추억의 미니홈피 로그인 페이지</title>
->>>>>>> master
-=======
-<title>추억의 미니홈피 로그인 페이지</title>
->>>>>>> master
 
 <style>
       

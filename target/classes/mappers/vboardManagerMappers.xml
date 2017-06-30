@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.analog.mappers.vboardManagerMappers">
+
+
+	<insert id="createVBoard">
+		insert into v_board_manager (m_id, vbm_name)
+		values(#{m_id}, #{vbm_name})
+	</insert>
+
+	
+	
+
+</mapper>

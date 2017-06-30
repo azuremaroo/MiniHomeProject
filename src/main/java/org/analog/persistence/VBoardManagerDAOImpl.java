@@ -23,10 +23,10 @@ public class VBoardManagerDAOImpl implements VBoardManagerDAO {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		paramMap.put("pbm_name", vbm_name);
+		paramMap.put("vbm_name", vbm_name);
 		paramMap.put("m_id", m_id);
 
-		sqlSession.insert(namespace + ".createPBoard", paramMap);
+		sqlSession.insert(namespace + ".createVBoard", paramMap);
 
 	}
 

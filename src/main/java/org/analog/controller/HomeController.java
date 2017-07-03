@@ -1,19 +1,29 @@
 package org.analog.controller;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.analog.domain.MemberVO;
 import org.analog.service.MemberService;
+import org.analog.util.UploadFileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -27,6 +37,9 @@ public class HomeController {
 
 	@Inject
 	private MemberService service;
+	
+	@Resource(name = "uploadPath")
+	  private String uploadPath;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -179,6 +192,51 @@ public class HomeController {
 		model.addAttribute("loginMember", loginMember);
 
 	} 
+	
+	
+	@RequestMapping(value = "/p_board", method = RequestMethod.GET)
+	public String p_BoardGET(@ModelAttribute MemberVO loginMember) throws Exception {
+
+		logger.info("p_BoardGET PAGE...............");
+
+		return "p_board";
+	}
+	
+	@RequestMapping(value = "/p_board/uploadAjax", method = RequestMethod.GET)
+	  public void uploadAjax() {
+	  }
+
+	  private String uploadFile(String originalName, byte[] fileData) throws Exception {
+
+	    UUID uid = UUID.randomUUID();
+
+	    String savedName = uid.toString() + "_" + originalName;
+
+	    File target = new File(uploadPath, savedName);
+
+	    FileCopyUtils.copy(fileData, target); // 데이터가 담긴 바이트 배열(fileData)을 파일(target)에 복사
+
+	    return savedName;
+
+	  }
+	  
+	  @ResponseBody
+	  @RequestMapping(value ="/p_board/uploadAjax", method=RequestMethod.POST, 
+	                  produces = "text/plain;charset=UTF-8")
+	  public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
+		  
+		  logger.info("uploadAjax PAGE...............");
+	    
+	    logger.info("originalName: " + file.getOriginalFilename());
+	    
+	   
+	    return 
+	      new ResponseEntity<>(
+	          UploadFileUtils.uploadFile(uploadPath, 
+	                file.getOriginalFilename(), 
+	                file.getBytes()), 
+	          HttpStatus.CREATED);
+	  }
 	 
 
 }

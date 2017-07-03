@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>동영상 게시판</title>
 </head>
 <body>
-dmdjfkdjfpasdasdasdasdasdas
+
 </body>
 </html>

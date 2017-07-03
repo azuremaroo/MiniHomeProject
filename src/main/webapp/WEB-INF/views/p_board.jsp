@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>사진게시판</title>
+<title>사진 게시판</title>
 
 <!-- 시작 : 필요한 외부파일 임포트문 -->
 

@@ -9,7 +9,9 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.analog.domain.MemberVO;
+import org.analog.domain.PBoardVO;
 import org.analog.service.MemberService;
+import org.analog.service.PBoardService;
 import org.analog.util.MediaUtils;
 import org.analog.util.UploadFileUtils;
 import org.apache.commons.io.IOUtils;
@@ -43,6 +45,9 @@ public class HomeController {
 
 	@Inject
 	private MemberService service;
+	
+	@Inject
+	private PBoardService pb_service;
 	
 	@Resource(name = "uploadPath")
 	  private String uploadPath;
@@ -208,6 +213,19 @@ public class HomeController {
 		return "p_board";
 	}
 	
+	@RequestMapping(value = "/p_board", method = RequestMethod.POST)
+	  public String p_BoardPOST(PBoardVO pboard, RedirectAttributes rttr) throws Exception {
+
+	    logger.info("p_BoardPOST PAGE ...........");
+	    logger.info(pboard.toString());
+
+	    pb_service.regist(pboard);
+
+	    rttr.addFlashAttribute("msg", "SUCCESS");
+
+	    return "redirect:/p_board";
+	  }
+	
 	@RequestMapping(value = "/p_board/uploadAjax", method = RequestMethod.GET)
 	  public void uploadAjax() {
 	  }
@@ -285,6 +303,9 @@ public class HomeController {
 	    }
 	      return entity;    
 	  }
+	  
+	  
+	  
 	 
 
 }

@@ -1,4 +1,5 @@
 package org.analog.domain;
+import java.util.Arrays;
 import java.util.Date;
 public class PBoardVO {
 	private int pb_no;
@@ -9,6 +10,7 @@ public class PBoardVO {
 	private int pb_viewcnt;
 	private Date regdate;
 	private Date updatedate;
+	private String[] files;
 	public int getPb_no() {
 		return pb_no;
 	}
@@ -56,5 +58,17 @@ public class PBoardVO {
 	}
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
+	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+	@Override
+	public String toString() {
+		return "PBoardVO [pb_no=" + pb_no + ", pb_title=" + pb_title + ", pb_content="
+				+ pb_content + ", pbm_no=" + pbm_no + ", regdate=" + regdate
+				+ ", pb_viewcnt=" + pb_viewcnt + ", files=" + Arrays.toString(files) + "]";
 	}
 }

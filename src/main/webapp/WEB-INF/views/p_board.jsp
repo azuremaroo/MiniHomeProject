@@ -50,7 +50,7 @@
 </head>
 <body>
 
-	<form id='registerForm' role="form" method="post">
+	<form id='registerForm' role="form" method="post" >
 		<div class="fileDrop"></div>
 		<div>
 			<hr>
@@ -63,43 +63,45 @@
 
 
 	<!-- 시작 : 첨부파일의 화면처리를 위한 템플릿 -->
-	<script type="text/javascript">
+	
+		<!-- 만들어진 자바스크립트 소스 파일을 삽입하는 코드 2줄 -->
+		<script type="text/javascript" >
+		function checkImageType(fileName){
+			
+			var pattern = /jpg|gif|png|jpeg/i;
+			
+			return fileName.match(pattern);
 
-function checkImageType(fileName){
-	
-	var pattern = /jpg|gif|png|jpeg/i;
-	
-	return fileName.match(pattern);
+		}
 
-}
-
-function getFileInfo(fullName){
-		
-	var fileName,imgsrc, getLink;
+		function getFileInfo(fullName){
+				
+			var fileName,imgsrc, getLink;
+			
+			var fileLink;
+			
+			if(checkImageType(fullName)){
+				imgsrc = "/minihome/p_board/displayFile?fileName="+fullName;
+				fileLink = fullName.substr(14);
+				
+				var front = fullName.substr(0,12); // 이부분을 의미함 : /2015/07/01/ 
+				var end = fullName.substr(14);
+				
+				getLink = "/minihome/p_board/displayFile?fileName="+front + end;
+				
+			}else{
+				imgsrc ="/resources/dist/img/file.png";
+				fileLink = fullName.substr(12);
+				getLink = "/minihome/p_board/displayFile?fileName="+fullName;
+			}
+			fileName = fileLink.substr(fileLink.indexOf("_")+1);
+			
+			return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+			
+		}
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	
-	var fileLink;
-	
-	if(checkImageType(fullName)){
-		imgsrc = "/minihome/p_board/displayFile?fileName="+fullName;
-		fileLink = fullName.substr(14);
-		
-		var front = fullName.substr(0,12); // 이부분을 의미함 : /2015/07/01/ 
-		var end = fullName.substr(14);
-		
-		getLink = "/minihome/p_board/displayFile?fileName="+front + end;
-		
-	}else{
-		imgsrc ="/resources/dist/img/file.png";
-		fileLink = fullName.substr(12);
-		getLink = "/minihome/p_board/displayFile?fileName="+fullName;
-	}
-	fileName = fileLink.substr(fileLink.indexOf("_")+1);
-	
-	return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
-	
-}
-</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 	<script id="template" type="text/x-handlebars-template">
 <li>

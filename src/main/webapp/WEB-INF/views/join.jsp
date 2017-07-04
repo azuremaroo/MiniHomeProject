@@ -82,7 +82,7 @@
       
     	<form action="join" method="POST">
       <h2 >아이디</h2> <input style="color: black;" type="text" name="m_id" >
-      <h2>비밀번호</h2> <input style="color: black;" type="text" name="m_pw" >
+      <h2>비밀번호</h2> <input style="color: black;" type="password" name="m_pw" >
       <h2>이름</h2> <input style="color: black;" type="text" name="m_name" >
       <h2>전화번호</h2> <input style="color: black;" type="text" name="m_phone" >
       <h2>생일</h2> <input style="color: black;" type="text" name="m_birth" >

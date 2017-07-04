@@ -51,9 +51,9 @@
 		<p>사진첩</p>
 		<p><c:forEach var="pboardmnt" items="${m_pboard}" varStatus="status">
 	    번호 : ${status.count}
-<%--	    사진첩이름 : ${pboardmnt.pbm_name}
+	    사진첩이름 : ${pboardmnt.pbm_name}
 	    사진첩공개여부 : ${pboardmnt.pbm_open}
-	    댓글사용여부 : ${pboardmnt.pbm_cmt_yn}--%>
+	    댓글사용여부 : ${pboardmnt.pbm_cmt_yn} 
 	</c:forEach></p>
 	</div>
 
@@ -61,9 +61,9 @@
 		<p>동영상</p>
 		<p><c:forEach var="vboardmnt" items="${m_vboard}" varStatus="status">
 	    번호 : ${status.count}
-<%--	    사진첩이름 : ${vboardmnt.vbm_name}
+	    사진첩이름 : ${vboardmnt.vbm_name}
 	    사진첩공개여부 : ${vboardmnt.vbm_open}
-	    댓글사용여부 : ${vboardmnt.vbm_cmt_yn}--%>
+	    댓글사용여부 : ${vboardmnt.vbm_cmt_yn} 
 	</c:forEach> </p>
 	</div>
  	

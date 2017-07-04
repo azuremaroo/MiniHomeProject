@@ -1,6 +1,7 @@
 package org.analog.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -27,6 +28,11 @@ public class PBoardManagerDAOImpl implements PBoardManagerDAO {
 
 		sqlSession.insert(namespace + ".createPBoard", paramMap);
 
+	}
+
+	@Override
+	public List<PBoardManagerVO> selectPBorad(String m_id) {
+		return sqlSession.selectList(namespace + ".selectPBoard", m_id);
 	}
 
 }

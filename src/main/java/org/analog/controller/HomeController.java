@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.analog.domain.MemberVO;
 import org.analog.domain.PBoardVO;
@@ -56,10 +57,16 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String loginGET(Model model) {
+	public String loginGET(Model model, HttpSession session ) {
 
 		logger.info("loginGET PAGE...............");
-
+		
+		
+		MemberVO vo = (MemberVO)session.getAttribute("loginMember");
+		if(vo != null) {
+			logger.info("loginGET PAGE..." + vo.toString());
+			return "main";
+		}
 		return "login";
 	}
 

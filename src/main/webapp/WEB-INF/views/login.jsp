@@ -80,7 +80,7 @@
  <form style="text-align:center;" method='post'>
     <br>
     아이디<input style="color: black;" type="text" name="m_id" >
-비밀번호<input style="color: black;" type="text" name="m_pw" >
+비밀번호<input style="color: black;" type="password" name="m_pw" >
 <input  style="color: #474e5d;" type="submit" value="로그인">
 </form>
 <p>${msg}</p> 

@@ -1,10 +1,12 @@
 package org.analog.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.analog.domain.VBoardManagerVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +30,13 @@ public class VBoardManagerDAOImpl implements VBoardManagerDAO {
 
 		sqlSession.insert(namespace + ".createVBoard", paramMap);
 
+	}
+
+	@Override
+	public List<VBoardManagerVO> selectVBorad(String m_id) {
+		
+		return sqlSession.selectList(namespace + ".selectVBoard", m_id);
+		
 	}
 
 }

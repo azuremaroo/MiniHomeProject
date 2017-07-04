@@ -2,6 +2,7 @@ package org.analog.persistence;
 
 import javax.inject.Inject;
 
+import org.analog.domain.GuestVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,11 @@ public class GuestDAOImpl implements GuestDAO {
 		
 		sqlSession.insert(namespace + ".createGuest", m_id);
 
+	}
+
+	@Override
+	public GuestVO selectGuest(String m_id) {
+		return sqlSession.selectOne(namespace + ".selectGuest", m_id);
 	}
 
 }

@@ -11,7 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{m_id})
 	</insert>
 
-	
+	<select id="selectGuest" resultType="GuestVO" >
+		select * 
+		from guest 
+		where m_id=#{m_id}
+	</select>
 	
 
 </mapper>

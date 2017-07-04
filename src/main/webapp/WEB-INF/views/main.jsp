@@ -139,7 +139,7 @@ article {
 					<li><a href="#">이웃추가</a></li>
 					<li><a href="#">이웃리스트</a></li>
 					<li><a href="logout">로그아웃</a></li>
-					<li><a href="#">회원정보수정</a></li>
+					<li><a href="./myPage">회원정보수정</a></li>
 				</ul>
 			</c:if>
 		</div>

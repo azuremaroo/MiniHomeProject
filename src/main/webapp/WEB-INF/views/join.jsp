@@ -80,7 +80,7 @@
       <h2 >프로필 입력</h2>
       <hr>
       
-    	<form method='post'>
+    	<form action="join" method="POST">
       <h2 >아이디</h2> <input style="color: black;" type="text" name="m_id" >
       <h2>비밀번호</h2> <input style="color: black;" type="text" name="m_pw" >
       <h2>이름</h2> <input style="color: black;" type="text" name="m_name" >

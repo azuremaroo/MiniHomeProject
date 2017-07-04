@@ -36,4 +36,11 @@ public class GuestVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
+	@Override
+	public String toString() {
+		return "GuestVO [g_no=" + g_no + ", m_id=" + m_id + ", g_open=" + g_open + ", regdate=" + regdate
+				+ ", updatedate=" + updatedate + "]";
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package org.analog.domain;
 import java.util.Date;
 public class VBoardManagerVO {
+	
 	private int vbm_no;
 	private String m_id;
 	private String vbm_name;
@@ -8,6 +9,7 @@ public class VBoardManagerVO {
 	private int vbm_cmt_yn;
 	private Date regdate;
 	private Date updatedate;
+	
 	public int getVbm_no() {
 		return vbm_no;
 	}
@@ -50,4 +52,11 @@ public class VBoardManagerVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
+	@Override
+	public String toString() {
+		return "VBoardManagerVO [vbm_no=" + vbm_no + ", m_id=" + m_id + ", vbm_name=" + vbm_name + ", vbm_open="
+				+ vbm_open + ", vbm_cmt_yn=" + vbm_cmt_yn + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+	}
+	
+	
 }

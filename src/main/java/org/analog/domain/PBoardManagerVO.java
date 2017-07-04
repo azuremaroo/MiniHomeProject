@@ -52,4 +52,10 @@ public class PBoardManagerVO {
 		this.updatedate = updatedate;
 	}
 	
+	@Override
+	public String toString() {
+		return "PBoardManagerVO [pbm_no=" + pbm_no + ", m_id=" + m_id + ", pbm_name=" + pbm_name + ", pbm_open="
+				+ pbm_open + ", pbm_cmt_yn=" + pbm_cmt_yn + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+	}
+	
 }

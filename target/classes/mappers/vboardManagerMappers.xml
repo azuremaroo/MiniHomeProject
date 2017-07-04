@@ -11,6 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{m_id}, #{vbm_name})
 	</insert>
 
+	<select id="selectVBoard" resultType="VBoardVO" >
+		select * 
+		from v_board_manager 
+		where m_id=#{m_id}
+	</select>
 	
 	
 

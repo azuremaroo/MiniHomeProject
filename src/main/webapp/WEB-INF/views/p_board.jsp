@@ -61,7 +61,30 @@
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 
+
+	<!-- 시작 : 첨부파일의 화면처리를 위한 템플릿 -->
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<script id="template" type="text/x-handlebars-template">
+<li>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<a href="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+	</span>
+  </div>
+</li>                
+	</script>
+	<!-- 끝 : 첨부파일의 화면처리를 위한 템플릿 -->
+
+
+
 	<script>
+		// 화면처리를 위한 템플릿 html 코드를 컴파일하여 변수에 저장
+		var template = Handlebars.compile($("#template").html());
+
 		$(".fileDrop").on("dragenter dragover", function(event) {
 			event.preventDefault();
 		});
@@ -97,22 +120,35 @@
 				}
 			});
 		});
-		
-		$("#registerForm").submit(function(event){
-			event.preventDefault();
-			
-			var that = $(this);
-			
-			var str ="";
-			$(".uploadedList .delbtn").each(function(index){
-				 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
-			});
-			
-			that.append(str);
 
-			that.get(0).submit();
-		});
-		
+		// 게시물을 등록할 때 업로드된 이미지 파일의 이름들을 같이 전달하기 위한 처리(input type='hidden' 태그를 생성하여 전달)
+		$("#registerForm").submit(
+				function(event) {
+					event.preventDefault();
+
+					var that = $(this);
+
+					var str = "";
+					$(".uploadedList .delbtn").each(
+							function(index) {
+								str += "<input type='hidden' name='files["
+										+ index + "]' value='"
+										+ $(this).attr("href") + "'> ";
+							});
+
+					that.append(str);
+
+					that.get(0).submit();
+				});
 	</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>

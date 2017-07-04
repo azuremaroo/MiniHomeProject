@@ -45,10 +45,6 @@ public class UploadFileUtils {
 
 		// ??? fileData를 target에 복사 = 만들어진 디렉토리에 가져온 바이트 형태의 데이터를 저장 (빈그릇에 실제 데이터를 넣어줌)
 		FileCopyUtils.copy(fileData, target);
-
-		
-		
-		
 		
 		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);
 

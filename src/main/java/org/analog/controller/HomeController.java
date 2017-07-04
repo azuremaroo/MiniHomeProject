@@ -1,6 +1,8 @@
 package org.analog.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -8,10 +10,14 @@ import javax.inject.Inject;
 
 import org.analog.domain.MemberVO;
 import org.analog.service.MemberService;
+import org.analog.util.MediaUtils;
 import org.analog.util.UploadFileUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -225,7 +231,7 @@ public class HomeController {
 	                  produces = "text/plain;charset=UTF-8")
 	  public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 		  
-		  logger.info("uploadAjax PAGE...............");
+		  logger.info("uploadAjax POST...............");
 	    
 	    logger.info("originalName: " + file.getOriginalFilename());
 	    
@@ -236,6 +242,48 @@ public class HomeController {
 	                file.getOriginalFilename(), 
 	                file.getBytes()), 
 	          HttpStatus.CREATED);
+	  }
+	  
+	  // 썸네일 이미지를 뿌려주는 메소드
+	  @ResponseBody
+	  @RequestMapping("/p_board/displayFile")
+	  public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
+	    
+	    InputStream in = null; 
+	    ResponseEntity<byte[]> entity = null;
+	    
+	    logger.info("FILE NAME: " + fileName);
+	    
+	    try{
+	      
+	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+	      
+	      MediaType mType = MediaUtils.getMediaType(formatName);
+	      
+	      HttpHeaders headers = new HttpHeaders();
+	      
+	      in = new FileInputStream(uploadPath+fileName);
+	      
+	      if(mType != null){
+	        headers.setContentType(mType);
+	      }else{
+	        
+	        fileName = fileName.substring(fileName.indexOf("_")+1);       
+	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	        headers.add("Content-Disposition", "attachment; filename=\""+ 
+	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+	      }
+
+	        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
+	          headers, 
+	          HttpStatus.CREATED);
+	    }catch(Exception e){
+	      e.printStackTrace();
+	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+	    }finally{
+	      in.close();
+	    }
+	      return entity;    
 	  }
 	 
 

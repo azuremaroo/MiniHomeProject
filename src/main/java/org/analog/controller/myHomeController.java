@@ -53,15 +53,6 @@ public class myHomeController {
 
 		logger.info(vo.toString());
 
-		//service.updateIntro(vo);
-
-		// 다시 조회
-		//MemberVO loginMember = service.readUser(vo.getM_id());
-
-		//logger.info(loginMember.toString());
-
-		//model.addAttribute("", loginMember);
-
 	} 
 	 
 

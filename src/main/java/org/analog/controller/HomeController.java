@@ -218,8 +218,15 @@ public class HomeController {
 
 	    logger.info("p_BoardPOST PAGE ...........");
 	    logger.info(pboard.toString());
-
+	    
+	    pboard.setPbm_no(3);
+	    pboard.setPb_content("내용");
+	    pboard.setPb_title("제목");
+	    
+	    logger.info(pboard.toString());
+	    
 	    pb_service.regist(pboard);
+	    
 
 	    rttr.addFlashAttribute("msg", "SUCCESS");
 
@@ -228,20 +235,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/p_board/uploadAjax", method = RequestMethod.GET)
 	  public void uploadAjax() {
-	  }
-
-	  private String uploadFile(String originalName, byte[] fileData) throws Exception {
-
-	    UUID uid = UUID.randomUUID();
-
-	    String savedName = uid.toString() + "_" + originalName;
-
-	    File target = new File(uploadPath, savedName);
-
-	    FileCopyUtils.copy(fileData, target); // 데이터가 담긴 바이트 배열(fileData)을 파일(target)에 복사
-
-	    return savedName;
-
 	  }
 	  
 	  @ResponseBody

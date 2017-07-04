@@ -69,6 +69,6 @@ public class PBoardVO {
 	public String toString() {
 		return "PBoardVO [pb_no=" + pb_no + ", pb_title=" + pb_title + ", pb_content="
 				+ pb_content + ", pbm_no=" + pbm_no + ", regdate=" + regdate
-				+ ", pb_viewcnt=" + pb_viewcnt + ", files=" + Arrays.toString(files) + "]";
+				+ ", pb_viewcnt=" + pb_viewcnt + ", pb_img=" + pb_img + ", files=" + Arrays.toString(files) + "]";
 	}
 }

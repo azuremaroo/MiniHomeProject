@@ -45,5 +45,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return  sqlSession.selectOne(namespace+".selectMember", m_id);
 	}
 
+	@Override
+	public int checkId(String m_id) {
+		return sqlSession.selectOne(namespace+".checkId", m_id);
+	}
+
 
 }

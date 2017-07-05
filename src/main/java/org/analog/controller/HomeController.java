@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -305,7 +306,26 @@ public class HomeController {
 	  }
 	  
 	  
-	  
-	 
+	  @ResponseBody
+	  @RequestMapping(value ="/join/checkId/{m_id}", method=RequestMethod.GET)
+	  public ResponseEntity<String> checkIdAjax(@PathVariable("m_id") String m_id)throws Exception{
+		  
+		  logger.info("checkIdAjax GET...............");
+		  logger.info("checkIdAjax GET..m_id>>......"+m_id);
+	    
+		  ResponseEntity<String> entity = null;
+		    try {
+		      int checkCnt = service.checkId(m_id);
+		      if(checkCnt == 1)
+		    	  entity = new ResponseEntity<String>("NO", HttpStatus.OK);
+		      else
+		    	  entity = new ResponseEntity<String>("YES", HttpStatus.OK);
+		    } catch (Exception e) {
+		      e.printStackTrace();
+		      entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		    }
+		    return entity;
+	  }
+
 
 }

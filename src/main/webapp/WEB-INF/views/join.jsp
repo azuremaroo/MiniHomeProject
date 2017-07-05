@@ -52,7 +52,44 @@
       color: #1abc9c !important;
   }
   </style>
-
+<script>
+ 
+	var idCheck = 0;
+    //아이디 체크하여 가입버튼 비활성화, 중복확인.
+    function checkId() {
+        var inputed = $('.m_id').val();
+        $.ajax({
+            data : {
+            	m_id : inputed
+            },
+            url : '/minihome/join/checkId/'+inputed,
+            success : function(data) {
+                if(inputed=="" ) {
+                    $(".signupbtn").prop("disabled", true);
+                    $(".signupbtn").css("background-color", "#aaaaaa");
+                    $("#checkaa").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                    $("#idcheck").html("* 사용불가");
+                } else if (data == 'YES') {
+                    $("#checkaa").css("background-color", "#B0F6AC");
+                    idCheck = 1;
+                    if(idCheck==1 ) {
+                        $(".signupbtn").prop("disabled", false);
+                        $(".signupbtn").css("background-color", "#4CAF50");
+                        //signupCheck();
+                        $("#idcheck").html("사용가능");
+                    } 
+                } else if (data == 'NO') {
+                    $(".signupbtn").prop("disabled", true);
+                    $(".signupbtn").css("background-color", "#aaaaaa");
+                    $("#checkaa").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                    $("#idcheck").html("* 사용불가");
+                } 
+            }
+        });
+    }
+</script>
 
 </head>
 <body>
@@ -77,17 +114,18 @@
 </nav>
 <div class="container-fluid bg-1 text-center" >
   <h1 class="margin"  style="font-size:0.9cm; font-weight: bold ;color:#555555;">MINIHOME 회원가입</h1>
-      <h2 >프로필 입력</h2>
+      <h2 ></h2>
       <hr>
       
     	<form action="join" method="POST">
-      <h2 >아이디</h2> <input style="color: black;" type="text" name="m_id" >
+      <h2 >아이디</h2> <input style="color: black;" type="text" name="m_id"  required class="m_id" oninput="checkId()" id="checkaa">
+      <span id="idcheck"></span>
       <h2>비밀번호</h2> <input style="color: black;" type="password" name="m_pw" >
       <h2>이름</h2> <input style="color: black;" type="text" name="m_name" >
       <h2>전화번호</h2> <input style="color: black;" type="text" name="m_phone" >
       <h2>생일</h2> <input style="color: black;" type="text" name="m_birth" >
     	<div class="container-fluid bg-1 text-center">  
-   			 <input  style="color: black;" type="submit" value="작성완료" >
+   			 <input class="signupbtn" style="color: black;" type="submit" value="작성완료" >
  		</div>
 		</form>
 

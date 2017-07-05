@@ -1,9 +1,8 @@
 package org.analog.controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.UUID;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -24,8 +23,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,24 +45,23 @@ public class HomeController {
 
 	@Inject
 	private MemberService service;
-	
+
 	@Inject
 	private PBoardService pb_service;
-	
+
 	@Resource(name = "uploadPath")
-	  private String uploadPath;
+	private String uploadPath;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String loginGET(Model model, HttpSession session ) {
+	public String loginGET(Model model, HttpSession session) {
 
 		logger.info("loginGET PAGE...............");
-		
-		
-		MemberVO vo = (MemberVO)session.getAttribute("loginMember");
-		if(vo != null) {
+
+		MemberVO vo = (MemberVO) session.getAttribute("loginMember");
+		if (vo != null) {
 			logger.info("loginGET PAGE..." + vo.toString());
 			return "main";
 		}
@@ -180,18 +178,18 @@ public class HomeController {
 
 		return "main";
 	}
-//
-//	@RequestMapping(value = "/main", method = RequestMethod.POST)
-//	public String mainPOST(@ModelAttribute MemberVO loginMember) throws Exception {
-//
-//		logger.info("mainPOST PAGE...............");
-//		logger.info(loginMember.toString());
-//
-//		// model.addAttribute("m_intro", service.viewIntro(m_id));
-//
-//		return "main";
-//	}
-
+	//
+	// @RequestMapping(value = "/main", method = RequestMethod.POST)
+	// public String mainPOST(@ModelAttribute MemberVO loginMember) throws
+	// Exception {
+	//
+	// logger.info("mainPOST PAGE...............");
+	// logger.info(loginMember.toString());
+	//
+	// // model.addAttribute("m_intro", service.viewIntro(m_id));
+	//
+	// return "main";
+	// }
 
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public void mainPOST(MemberVO vo, Model model) throws Exception {
@@ -209,103 +207,107 @@ public class HomeController {
 
 		model.addAttribute("loginMember", loginMember);
 
-	} 
-	
-	
+	}
+
 	@RequestMapping(value = "/p_board", method = RequestMethod.GET)
-	public String p_BoardGET(@ModelAttribute MemberVO loginMember) throws Exception {
+	public String p_BoardGET(Model model, PBoardVO pboard, HttpSession session) throws Exception {
 
 		logger.info("p_BoardGET PAGE...............");
 
+		MemberVO vo = (MemberVO) session.getAttribute("loginMember");
+		
+		
+		// 테스트를 위한 pbm_no 설정
+		pboard.setPbm_no(3);
+
+		model.addAttribute("pbm_no", pboard.getPbm_no());
+
 		return "p_board";
 	}
-	
+
+	@RequestMapping("/p_board/{pbm_no}")
+	@ResponseBody
+	public List<String> getPhotoList(@PathVariable("pbm_no") Integer pbm_no) throws Exception {
+
+		logger.info("getPhotoList PAGE...............");
+
+		return pb_service.getPhotoList(pbm_no);
+	}
+
 	@RequestMapping(value = "/p_board", method = RequestMethod.POST)
-	  public String p_BoardPOST(PBoardVO pboard, RedirectAttributes rttr) throws Exception {
+	public String p_BoardPOST(PBoardVO pboard, RedirectAttributes rttr) throws Exception {
 
-	    logger.info("p_BoardPOST PAGE ...........");
-	    logger.info(pboard.toString());
-	    
-	    pboard.setPbm_no(3);
-	    pboard.setPb_content("내용");
-	    pboard.setPb_title("제목");
-	    
-	    logger.info(pboard.toString());
-	    
-	    pb_service.regist(pboard);
-	    
+		logger.info("p_BoardPOST PAGE ...........");
+		logger.info(pboard.toString());
 
-	    rttr.addFlashAttribute("msg", "SUCCESS");
+		pboard.setPbm_no(3);
+		pboard.setPb_content("내용");
+		pboard.setPb_title("제목");
 
-	    return "redirect:/p_board";
-	  }
-	
+		logger.info(pboard.toString());
+
+		pb_service.regist(pboard);
+
+		rttr.addFlashAttribute("msg", "SUCCESS");
+
+		return "redirect:/p_board";
+	}
+
 	@RequestMapping(value = "/p_board/uploadAjax", method = RequestMethod.GET)
-	  public void uploadAjax() {
-	  }
-	  
-	  @ResponseBody
-	  @RequestMapping(value ="/p_board/uploadAjax", method=RequestMethod.POST, 
-	                  produces = "text/plain;charset=UTF-8")
-	  public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
-		  
-		  logger.info("uploadAjax POST...............");
-	    
-	    logger.info("originalName: " + file.getOriginalFilename());
-	    
-	   
-	    return 
-	      new ResponseEntity<>(
-	          UploadFileUtils.uploadFile(uploadPath, 
-	                file.getOriginalFilename(), 
-	                file.getBytes()), 
-	          HttpStatus.CREATED);
-	  }
-	  
-	  // 썸네일 이미지를 뿌려주는 메소드
-	  @ResponseBody
-	  @RequestMapping("/p_board/displayFile")
-	  public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
-	    
-	    InputStream in = null; 
-	    ResponseEntity<byte[]> entity = null;
-	    
-	    logger.info("FILE NAME: " + fileName);
-	    
-	    try{
-	      
-	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-	      
-	      MediaType mType = MediaUtils.getMediaType(formatName);
-	      
-	      HttpHeaders headers = new HttpHeaders();
-	      
-	      in = new FileInputStream(uploadPath+fileName);
-	      
-	      if(mType != null){
-	        headers.setContentType(mType);
-	      }else{
-	        
-	        fileName = fileName.substring(fileName.indexOf("_")+1);       
-	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-	        headers.add("Content-Disposition", "attachment; filename=\""+ 
-	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-	      }
+	public void uploadAjax() {
+	}
 
-	        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
-	          headers, 
-	          HttpStatus.CREATED);
-	    }catch(Exception e){
-	      e.printStackTrace();
-	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-	    }finally{
-	      in.close();
-	    }
-	      return entity;    
-	  }
-	  
-	  
-	  
-	 
+	@ResponseBody
+	@RequestMapping(value = "/p_board/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+
+		logger.info("uploadAjax POST...............");
+
+		logger.info("originalName: " + file.getOriginalFilename());
+
+		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
+				HttpStatus.CREATED);
+	}
+
+	// 썸네일 이미지를 뿌려주는 메소드
+	@ResponseBody
+	@RequestMapping("/p_board/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+
+		logger.info("displayFile.................... ");
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+
+		logger.info("FILE NAME: " + fileName);
+
+		try {
+
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+			MediaType mType = MediaUtils.getMediaType(formatName);
+
+			HttpHeaders headers = new HttpHeaders();
+
+			in = new FileInputStream(uploadPath + fileName);
+
+			if (mType != null) {
+				headers.setContentType(mType);
+			} else {
+
+				fileName = fileName.substring(fileName.indexOf("_") + 1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition",
+						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
 
 }

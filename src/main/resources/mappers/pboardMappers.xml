@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="create">
 		insert into p_board (pbm_no, pb_title, pb_content, pb_img)
 		values(#{pbm_no},#{pb_title}, #{pb_content}, #{pb_img})
-	</insert>
+</insert>
+
+<select id="slectList" resultType="string">
+select pb_img from p_board where pbm_no = #{pbm_no} order by regdate
+</select> 
 
 </mapper>

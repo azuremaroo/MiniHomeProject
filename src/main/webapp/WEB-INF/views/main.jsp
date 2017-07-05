@@ -9,12 +9,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-
-
-
-
-
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -37,70 +31,102 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
+	
 <style>
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
 
 @import
 	url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+li {
+      margin: 5px 0 0 0;
+    }
+    
+    ul.nav2 li a {
+      -webkit-transition: all 0.3s ease-out;
+      background: #cbcbcb url(images/border.png) no-repeat;
+      color: #174867;
+      padding: 7px 15px 7px 15px;
+      -webkit-border-top-right-radius: 15px;
+      -webkit-border-bottom-right-radius: 15px;
+      width: 100px;
+      display: block;
+      text-decoration: none;
+      -webkit-box-shadow: 1px 1px 4px #888;
+    }
+    
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #2f2f2f;
+    }
+    
+    .bg-4 {
+      background-color: #2f2f2f;
+      /* Black Gray */
+      color: #fff;
+    }
+    
+    .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+      background-color: #fff;
+    }
+    
+    .navbar-nav li a:hover {
+      color: #1abc9c !important;
+    }
+    
+    div.container {
+      width: 100%;
+      border: 1px solid gray;
+    }
+    
+    header,
+    footer {
+      padding: 1em;
+      color: gray;
+      background-color: white;
+      clear: left;
+      text-align: center;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    nav ul a {
+      text-decoration: none;
+    }
+    
+    article {
+      margin-left: 170px;
+      border-left: 1px solid gray;
+      padding: 1em;
+      overflow: hidden;
+    }
+    
+    table,
+    th,
+    td {
+      border: 1px solid honeydew;
+      border-collapse: collapse;
+      color: #2f2f2f;
+    }
 
-body {
-	font: 20px Montserrat, sans-serif;
-	line-height: 1.8;
-	color: #f5f6f7;
-}
-
-.bg-4 {
-	background-color: #2f2f2f; /* Black Gray */
-	color: #fff;
-}
-
-.navbar {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	border: 0;
-	border-radius: 0;
-	margin-bottom: 0;
-	font-size: 12px;
-	letter-spacing: 5px;
-}
-
-.navbar-nav  li a:hover {
-	color: #1abc9c !important;
-}
-
-div.container {
-	width: 100%;
-	border: 1px solid gray;
-}
-
-header, footer {
-	padding: 1em;
-	color: gray;
-	background-color: white;
-	clear: left;
-	text-align: center;
-}
-
-nav ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-nav ul a {
-	text-decoration: none;
-}
-
-article {
-	margin-left: 170px;
-	border-left: 1px solid gray;
-	padding: 1em;
-	overflow: hidden;
-}
 </style>
 
 

@@ -50,7 +50,7 @@
 </head>
 <body>
 
-	<form id='registerForm' role="form" method="post" >
+	<form id='registerForm' role="form" method="post">
 		<div class="fileDrop"></div>
 		<div>
 			<hr>
@@ -61,47 +61,57 @@
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 
+	<!-- DBloadedList 클래스 : JSON 방식으로 읽어온 데이터를 뿌릴 부분 -->
+	<ul class="mailbox-attachments clearfix DBloadedList"></ul>
+
 
 	<!-- 시작 : 첨부파일의 화면처리를 위한 템플릿 -->
-	
-		<!-- 만들어진 자바스크립트 소스 파일을 삽입하는 코드 2줄 -->
-		<script type="text/javascript" >
-		function checkImageType(fileName){
-			
+
+	<!-- 만들어진 자바스크립트 소스 파일을 삽입하는 코드 2줄 -->
+	<script type="text/javascript">
+		function checkImageType(fileName) {
+
 			var pattern = /jpg|gif|png|jpeg/i;
-			
+
 			return fileName.match(pattern);
 
 		}
 
-		function getFileInfo(fullName){
-				
-			var fileName,imgsrc, getLink;
-			
+		function getFileInfo(fullName) {
+
+			var fileName, imgsrc, getLink;
+
 			var fileLink;
-			
-			if(checkImageType(fullName)){
-				imgsrc = "/minihome/p_board/displayFile?fileName="+fullName;
+
+			if (checkImageType(fullName)) {
+				imgsrc = "/minihome/p_board/displayFile?fileName=" + fullName;
 				fileLink = fullName.substr(14);
-				
-				var front = fullName.substr(0,12); // 이부분을 의미함 : /2015/07/01/ 
+
+				var front = fullName.substr(0, 12); // 이부분을 의미함 : /2015/07/01/ 
 				var end = fullName.substr(14);
-				
-				getLink = "/minihome/p_board/displayFile?fileName="+front + end;
-				
-			}else{
-				imgsrc ="/resources/dist/img/file.png";
+
+				getLink = "/minihome/p_board/displayFile?fileName=" + front
+						+ end;
+
+			} else {
+				imgsrc = "/resources/dist/img/file.png";
 				fileLink = fullName.substr(12);
-				getLink = "/minihome/p_board/displayFile?fileName="+fullName;
+				getLink = "/minihome/p_board/displayFile?fileName=" + fullName;
 			}
-			fileName = fileLink.substr(fileLink.indexOf("_")+1);
-			
-			return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
-			
+			fileName = fileLink.substr(fileLink.indexOf("_") + 1);
+
+			return {
+				fileName : fileName,
+				imgsrc : imgsrc,
+				getLink : getLink,
+				fullName : fullName
+			};
+
 		}
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 
 	<script id="template" type="text/x-handlebars-template">
 <li>
@@ -178,7 +188,45 @@
 					that.get(0).submit();
 				});
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
 
+			var pbm_no = ${pbm_no};
+			console.log("console----------------------1");
+			console.log(pbm_no);
+
+			// HTTP GET 방식 요청을 통해 서버로부터 받은 JSON데이터를 로드하는 메소드
+			// $.getJSON(url, callback){}
+			$.getJSON("/minihome/p_board/"+pbm_no, function(list) {
+				
+				console.log("getJSON function start--------------");
+				
+				console.log("console----------------------2");
+				console.log(this);
+
+				// $(순회할 배열이나 객체).each(각 요소를 대상으로 실행할 callback 함수
+				$(list).each(function() {
+
+					// getFileInfo(file) : file의 정보를 담은 객체를 리턴하는 메소드
+					// this : 이벤트가 발생한 요소의 정보가 담긴 객체(이미지 파일의 fullname이 String 타입 저장됨)
+					// fileInfo : 선택된 이미지파일의 정보를 담은 객체
+					var fileInfo = getFileInfo(this);
+					
+					console.log("console----------------------3");
+					console.log(fileInfo);
+					console.log(this);
+					
+
+					// template(fileInfo) : 이미지 파일의 정보가 담긴 객체를 읽어 지정된 html 태그 사이에 배치하고 수정된 html 태그를 리턴하는 메소드
+					var html = template(fileInfo);
+
+					// .append(html) : 지정된 요소(.uploadedList) 끝에 지정된 내용(html)을 삽입하는 메소드
+					$(".DBloadedList").append(html);
+
+				});
+			});
+		});
+	</script>
 
 
 

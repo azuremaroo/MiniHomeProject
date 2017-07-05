@@ -1,11 +1,12 @@
 package org.analog.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.analog.domain.PBoardVO;
 import org.analog.persistence.PBoardDAO;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PBoardServiceImpl implements PBoardService {
@@ -39,6 +40,12 @@ public class PBoardServiceImpl implements PBoardService {
 		
 		System.out.println("PBoardServiceImpl.regist...........4");
 		
+	}
+
+	@Override
+	public List<String> getPhotoList(Integer pbm_no) {
+		
+		return dao.selectList(pbm_no);
 	}
 
 }

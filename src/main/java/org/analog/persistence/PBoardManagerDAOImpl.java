@@ -35,4 +35,9 @@ public class PBoardManagerDAOImpl implements PBoardManagerDAO {
 		return sqlSession.selectList(namespace + ".selectPBoard", m_id);
 	}
 
+	@Override
+	public int selectPbm_no(String m_id) {
+		return sqlSession.selectOne(namespace + ".selectPbm_no", m_id);
+	}
+
 }

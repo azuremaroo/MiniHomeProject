@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.analog.domain.MemberVO;
 import org.analog.domain.PBoardVO;
 import org.analog.service.MemberService;
+import org.analog.service.PBoardManagerService;
 import org.analog.service.PBoardService;
 import org.analog.util.MediaUtils;
 import org.analog.util.UploadFileUtils;
@@ -45,6 +46,9 @@ public class HomeController {
 
 	@Inject
 	private MemberService service;
+	
+	@Inject
+	private PBoardManagerService pbm_service;
 
 	@Inject
 	private PBoardService pb_service;
@@ -215,12 +219,10 @@ public class HomeController {
 		logger.info("p_BoardGET PAGE...............");
 
 		MemberVO vo = (MemberVO) session.getAttribute("loginMember");
+	
+		model.addAttribute("pbm_no", pbm_service.getPbm_no(vo.getM_id()));
 		
-		
-		// 테스트를 위한 pbm_no 설정
-		pboard.setPbm_no(3);
-
-		model.addAttribute("pbm_no", pboard.getPbm_no());
+		System.out.println(pbm_service.getPbm_no(vo.getM_id()));
 
 		return "p_board";
 	}

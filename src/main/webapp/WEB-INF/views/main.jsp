@@ -31,102 +31,98 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	
-	
-<style>
 
+
+
+
+<style>
 @import
 	url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
-li {
-      margin: 5px 0 0 0;
-    }
-    
-    ul.nav2 li a {
-      -webkit-transition: all 0.3s ease-out;
-      background: #cbcbcb url(images/border.png) no-repeat;
-      color: #174867;
-      padding: 7px 15px 7px 15px;
-      -webkit-border-top-right-radius: 15px;
-      -webkit-border-bottom-right-radius: 15px;
-      width: 100px;
-      display: block;
-      text-decoration: none;
-      -webkit-box-shadow: 1px 1px 4px #888;
-    }
-    
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    body {
-      font: 20px Montserrat, sans-serif;
-      line-height: 1.8;
-      color: #2f2f2f;
-    }
-    
-    .bg-4 {
-      background-color: #2f2f2f;
-      /* Black Gray */
-      color: #fff;
-    }
-    
-    .navbar {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      border: 0;
-      border-radius: 0;
-      margin-bottom: 0;
-      font-size: 12px;
-      letter-spacing: 5px;
-      background-color: #fff;
-    }
-    
-    .navbar-nav li a:hover {
-      color: #1abc9c !important;
-    }
-    
-    div.container {
-      width: 100%;
-      border: 1px solid gray;
-    }
-    
-    header,
-    footer {
-      padding: 1em;
-      color: gray;
-      background-color: white;
-      clear: left;
-      text-align: center;
-    }
-    
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    nav ul a {
-      text-decoration: none;
-    }
-    
-    article {
-      margin-left: 170px;
-      border-left: 1px solid gray;
-      padding: 1em;
-      overflow: hidden;
-    }
-    
-    table,
-    th,
-    td {
-      border: 1px solid honeydew;
-      border-collapse: collapse;
-      color: #2f2f2f;
-    }
 
+li {
+	margin: 5px 0 0 0;
+}
+
+ul.nav2 li a {
+	-webkit-transition: all 0.3s ease-out;
+	background: #cbcbcb url(images/border.png) no-repeat;
+	color: #174867;
+	padding: 7px 15px 7px 15px;
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-right-radius: 15px;
+	width: 100px;
+	display: block;
+	text-decoration: none;
+	-webkit-box-shadow: 1px 1px 4px #888;
+}
+
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+body {
+	font: 20px Montserrat, sans-serif;
+	line-height: 1.8;
+	color: #2f2f2f;
+}
+
+.bg-4 {
+	background-color: #2f2f2f;
+	/* Black Gray */
+	color: #fff;
+}
+
+.navbar {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;
+	background-color: #fff;
+}
+
+.navbar-nav li a:hover {
+	color: #1abc9c !important;
+}
+
+div.container {
+	width: 100%;
+	border: 1px solid gray;
+}
+
+header, footer {
+	padding: 1em;
+	color: gray;
+	background-color: white;
+	clear: left;
+	text-align: center;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+nav ul a {
+	text-decoration: none;
+}
+
+article {
+	margin-left: 170px;
+	border-left: 1px solid gray;
+	padding: 1em;
+	overflow: hidden;
+}
+
+table, th, td {
+	border: 1px solid honeydew;
+	border-collapse: collapse;
+	color: #2f2f2f;
+}
 </style>
 
 
@@ -143,38 +139,59 @@ li {
 
 	<!-- 윗부분-->
 	<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"
-				style="font-family: 'Nanum Gothic Coding', serif; font-size: 0.9cm; font-weight: bold; color: palevioletred;">MINIHOME</a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<c:if test="${loginMember.m_id == null }">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="login">로그인</a></li>
-					<li><a href="join">회원가입</a></li>
-				</ul>
-			</c:if>
-			<c:if test="${loginMember.m_id != null }">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">이웃추가</a></li>
-					<li><a href="#">이웃리스트</a></li>
-					<li><a href="logout">로그아웃</a></li>
-					<li><a href="./myPage">회원정보수정</a></li>
-				</ul>
-			</c:if>
-		</div>
+
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target="#myNavbar">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#"
+			style="font-family: 'Nanum Gothic Coding', serif; font-size: 0.9cm; font-weight: bold; color: palevioletred;">MINIHOME</a>
 	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+		<c:if test="${loginMember.m_id == null }">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="login">로그인</a></li>
+				<li><a href="join">회원가입</a></li>
+			</ul>
+		</c:if>
+		<c:if test="${loginMember.m_id != null }">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">이웃추가</a></li>
+				<li><a href="#">이웃리스트</a></li>
+				<li><a href="logout">로그아웃</a></li>
+				<li><a href="./myPage">회원정보수정</a></li>
+			</ul>
+		</c:if>
+	</div>
+
 	</nav>
 	<!-- 윗부분끝-->
 
-	<div class="container text-center">
-		<div class="row">
+	<div >
+		<h1 class="text-center">
+			나의 미니홈피 <a href="#" class="close" data-dismiss="alert"
+				aria-label="close">×</a>
+		</h1>
+	</div>
+
+	<div class="container2" style="max-width: 1800px; height: 800px;">
+
+		<div class="col-sm-2 navbar-right" style="width: 10%">
+			<div class="navbox">
+				<ul class="nav nav2">
+					<li><a href="">홈</a></li>
+					<li><a href="./p_board">사진첩</a></li>
+					<li><a href="">동영상</a></li>
+					<li><a href="">방명록</a></li>
+					<li><a href="">관리</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="container" style="max-width: 1480px; height: 800px;">
 			<div class="col-sm-3 well">
 				<div class="well">
 					<p>
@@ -183,21 +200,8 @@ li {
 					<img src="img/aaa.jpg" class="img-circle" height="65" width="65"
 						alt="Avatar">
 				</div>
-				<div class="well">
-					<p>
-						<a href="#">Interests</a>
-					</p>
-					<p>
-						<span class="label label-default">News</span> <span
-							class="label label-primary">W3Schools</span> <span
-							class="label label-success">Labels</span> <span
-							class="label label-info">Football</span> <span
-							class="label label-warning">Gaming</span> <span
-							class="label label-danger">Friends</span>
-					</p>
-				</div>
 				<div class="alert alert-success fade in">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
 					<p>
 						<strong>session id : ${loginMember.m_id}</strong>
 					</p>
@@ -208,112 +212,63 @@ li {
 							type="hidden" name='m_id' value="${loginMember.m_id }">
 					</form>
 				</div>
-				<p>
-					<a href="#">Link</a>
-				</p>
-				<p>
-					<a href="#">Link</a>
-				</p>
-				<p>
-					<a href="#">Link</a>
-				</p>
 			</div>
+
+			<p class="text-left" style="color: royalblue">update news</p>
+
 			<div class="col-sm-7">
 
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-default text-left">
-							<div class="panel-body">
-								<p contenteditable="true">Status: Feeling Blue</p>
-								<button type="button" class="btn btn-default btn-sm">
-									<span class="glyphicon glyphicon-thumbs-up"></span> Like
-								</button>
-							</div>
-						</div>
-					</div>
+				<div class="row panel-body col-sm-12 text-left">
+
+					<table style="width: 130%">
+						<tr>
+							<th style="color: deeppink">최근 게시글 리스트</th>
+							<th style="color: deeppink">게시글수</th>
+						</tr>
+						<tr>
+							<td style="color: gray;">최신글</td>
+							<td>사진첩</td>
+						</tr>
+						<tr>
+							<td>최신글</td>
+							<td>동영상</td>
+						</tr>
+						<tr>
+							<td>최신글</td>
+							<td>방명록</td>
+						</tr>
+					</table>
+
 				</div>
 
 				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>John</p>
-							<img src="bird.jpg" class="img-circle" height="55" width="55"
-								alt="Avatar">
+					<div class="col-sm-40">
+						<p class="text-left" style="color: royalblue">photto story</p>
+						<div class="well1" style="padding: 50px; align: center">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
+							<img src="bandmember.jpg" class="img-circle" height="100"
+								width="100" alt="Avatar"> <img src="bandmember.jpg"
+								class="img-circle" height="100" width="100" alt="Avatar">
 						</div>
 					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Bo</p>
-							<img src="bandmember.jpg" class="img-circle" height="55"
-								width="55" alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Jane</p>
-							<img src="bandmember.jpg" class="img-circle" height="55"
-								width="55" alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Anja</p>
-							<img src="bird.jpg" class="img-circle" height="55" width="55"
-								alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-2 well">
-				<div class="thumbnail">
-					<p>Upcoming Events:</p>
-					<img src="paris.jpg" alt="Paris" width="400" height="300">
-					<p>
-						<strong>Paris</strong>
-					</p>
-					<p>Fri. 27 November 2015</p>
-					<button class="btn btn-primary">Info</button>
-				</div>
-				<div class="well">
-					<p>ADS</p>
-				</div>
-				<div class="well">
-					<p>ADS</p>
-				</div>
+				</div>	
 			</div>
 		</div>
 	</div>

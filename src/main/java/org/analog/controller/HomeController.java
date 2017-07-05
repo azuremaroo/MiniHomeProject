@@ -221,8 +221,6 @@ public class HomeController {
 		MemberVO vo = (MemberVO) session.getAttribute("loginMember");
 	
 		model.addAttribute("pbm_no", pbm_service.getPbm_no(vo.getM_id()));
-		
-		System.out.println(pbm_service.getPbm_no(vo.getM_id()));
 
 		return "p_board";
 	}
@@ -237,12 +235,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/p_board", method = RequestMethod.POST)
-	public String p_BoardPOST(PBoardVO pboard, RedirectAttributes rttr) throws Exception {
+	public String p_BoardPOST(PBoardVO pboard, RedirectAttributes rttr, HttpSession session) throws Exception {
 
 		logger.info("p_BoardPOST PAGE ...........");
 		logger.info(pboard.toString());
+		
+		MemberVO vo = (MemberVO) session.getAttribute("loginMember");
 
-		pboard.setPbm_no(3);
+		pboard.setPbm_no(pbm_service.getPbm_no(vo.getM_id()));
 		pboard.setPb_content("내용");
 		pboard.setPb_title("제목");
 

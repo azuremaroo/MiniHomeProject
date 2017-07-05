@@ -79,4 +79,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int checkId(String m_id) throws Exception {
+		return dao.checkId(m_id);
+	}
+
+
 }

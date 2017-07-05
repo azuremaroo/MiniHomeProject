@@ -13,5 +13,7 @@ public interface MemberService {
 	public int isMember(String m_id, String m_pw) throws Exception;
 
 	public MemberVO readUser(String m_id) throws Exception;
+	
+	public int checkId(String m_id) throws Exception;
 
 }

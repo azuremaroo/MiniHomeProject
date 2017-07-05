@@ -12,4 +12,6 @@ public interface MemberDAO {
 
 	public MemberVO readUser(String m_id);
 
+	public int checkId(String m_id);
+
 }
